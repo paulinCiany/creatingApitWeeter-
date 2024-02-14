@@ -1,17 +1,23 @@
 
 const express = require('express');
-const tweetController = require('../controllers/tweetController');
+const tweetController = require('../controllers/tweetController.js');
 
 const router = express.Router();
+function erroMsg(){
+  return res.status(404).json({ error: 'Tweet not found' });
+}
 
 // Create
 router.post('/', (req, res) => {
   const { content } = req.body;
   const newTweet = tweetController.createTweet(content);
+
   res.json(newTweet);
 });
 
+
 // Read all
+
 router.get('/', (req, res) => {
   const allTweets = tweetController.getAllTweets();
   res.json(allTweets);
@@ -24,7 +30,7 @@ router.get('/:id', (req, res) => {
   if (tweet) {
     res.json(tweet);
   } else {
-    res.status(404).json({ error: 'Tweet not found' });
+    erroMsg()
   }
 });
 
@@ -36,18 +42,19 @@ router.put('/:id', (req, res) => {
   if (updatedTweet) {
     res.json(updatedTweet);
   } else {
-    res.status(404).json({ error: 'Tweet not found' });
+    erroMsg()
   }
 });
 
 // Delete
-router.delete('/:id', (req, res) => {
+router.delete('delete/:id', (req, res) => {
   const tweetId = parseInt(req.params.id);
   const deletedTweet = tweetController.deleteTweet(tweetId);
   if (deletedTweet) {
     res.json(deletedTweet);
+    console.log(`the tweet id ${deletedTweet} is deleted`)
   } else {
-    res.status(404).json({ error: 'Tweet not found' });
+    erroMsg()
   }
 });
 

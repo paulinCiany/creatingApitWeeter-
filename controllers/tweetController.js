@@ -1,11 +1,14 @@
-const { Tweet, tweets } = require('../models/tweetModel');
+const { Tweet, tweets } = require('../models/tweetModel.js');
+
 
 // Create
 const createTweet = (content) => {
   const newTweet = new Tweet(tweets.length + 1, content);
   tweets.push(newTweet);
-  return newTweet;
+  return tweets;
 };
+
+
 
 // Read all
 const getAllTweets = () => {
@@ -16,6 +19,7 @@ const getAllTweets = () => {
 const getTweetById = (id) => {
   return tweets.find((tweet) => tweet.id === id);
 };
+
 
 // Update
 const updateTweet = (id, content) => {

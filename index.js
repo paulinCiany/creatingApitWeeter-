@@ -1,11 +1,18 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const tweetRoutes = require('./routes/tweetRoutes');
+const userRoutes = require('./routes/userRoutes');
+const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 const PORT = 3000;
 
-app.use(bodyParser.json());
+
+app.use('/users', userRoutes);
+app.use('/auth', authRoutes);
+
+
+
+app.use(express.json());
 
 // Use tweet routes
 app.use('/tweets', tweetRoutes);
