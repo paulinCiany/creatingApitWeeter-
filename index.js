@@ -1,18 +1,14 @@
 const express = require('express');
 const tweetRoutes = require('./routes/tweetRoutes');
-const userRoutes = require('./routes/userRoutes');
 const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 const PORT = 3000;
 
 
-app.use('/users', userRoutes);
-app.use('/auth', authRoutes);
-
-
-
+// app.use('/users', userRoutes);
 app.use(express.json());
+app.use('/auth', authRoutes);
 
 // Use tweet routes
 app.use('/tweets', tweetRoutes);
