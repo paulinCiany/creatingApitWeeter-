@@ -2,19 +2,19 @@
 const express = require('express');
 const tweetController = require('../controllers/tweetController.js');
 
+
 const router = express.Router();
-function erroMsg(){
+
+function erroMsg() {
   return res.status(404).json({ error: 'Tweet not found' });
 }
 
 // Create
 router.post('/', (req, res) => {
-  const { content } = req.body;
-  const newTweet = tweetController.createTweet(content);
-
+  const { post } = req.body;
+  const newTweet = tweetController.createTweet(post);
   res.json(newTweet);
 });
-
 
 // Read all
 
